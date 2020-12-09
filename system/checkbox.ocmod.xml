@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Checkbox RRO</name>
+    <author>web systems solutions</author>
+    <code>checkbox_rro</code>
+    <version>1.0</version>
+    <link>https://web-systems.solutions/</link>
+    <file path="admin/controller/sale/order.php">
+        <operation>
+            <search><![CDATA[$this->response->setOutput($this->load->view('sale/order_list', $data));]]></search>
+            <add position="before"><![CDATA[
+			$data['checkbox_rro'] = $this->load->controller('extension/module/checkbox/getViewList');
+				]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[$this->response->setOutput($this->load->view('sale/order_info', $data));]]></search>
+            <add position="before"><![CDATA[
+			$data['checkbox_rro'] = $this->load->controller('extension/module/checkbox/getViewInfo');
+				]]></add>
+        </operation>
+
+
+        <operation>
+            <search><![CDATA[$this->response->setOutput($this->load->view('sale/order_list.tpl', $data));]]></search>
+            <add position="before"><![CDATA[
+			$data['checkbox_rro'] = $this->load->controller('extension/module/checkbox/getViewList');
+				]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[$this->response->setOutput($this->load->view('sale/order_info.tpl', $data));]]></search>
+            <add position="before"><![CDATA[
+			$data['checkbox_rro'] = $this->load->controller('extension/module/checkbox/getViewInfo');
+				]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/sale/order_list.tpl">
+        <operation>
+            <search><![CDATA[<h1><?php echo $heading_title; ?></h1>]]></search>
+            <add position="after"><![CDATA[
+			    <?= $checkbox_rro ?>
+				]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/sale/order_info.tpl">
+        <operation>
+            <search index="1"><![CDATA[<div class="col-md-4">]]></search>
+            <add position="before"><![CDATA[
+			    <?= $checkbox_rro ?>
+				]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[col-md-4]]></search>
+            <add position="replace"><![CDATA[col-md-3]]></add>
+        </operation>
+    </file>
+</modification>
