@@ -13,5 +13,8 @@ $_['entry_rro_login']           = 'Логин';
 $_['entry_rro_password']        = 'Пароль';
 $_['entry_rro_cashbox_key']     = 'Ключ лицензии кассы';
 
+$_['entry_rro_receipt_header']     = 'Текст над чеком';
+$_['entry_rro_receipt_footer']     = 'Текст под чеком';
+
 // Error
 $_['error_permission'] = 'У вас нет прав для управления этим модулем!';

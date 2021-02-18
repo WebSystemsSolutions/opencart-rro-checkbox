@@ -44,7 +44,13 @@
   <?php } ?>
 
   <?php } else { ?>
-    <td colspan="2">Згенерувати чек</td>
+    <td>Згенерувати чек</td>
+    <td>
+        <select class="form-control" id="checkbox-rro-order-info-button-create-receipt-payment-type">
+          <option value="CASH" selected>Готівка</option>
+          <option value="CARD">Безготівкова форма оплати</option>
+        </select>
+    </td>
     <td>
       <button id="checkbox-rro-order-info-button-create-receipt" class="btn btn-success btn-lg"><i
                 class="fa fa-shopping-cart"></i></button>

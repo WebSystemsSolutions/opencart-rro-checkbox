@@ -32,9 +32,11 @@
 
             $(document).on('click', '#checkbox-rro-order-info-button-create-receipt', function () {
 
+                var payment_type = $('#checkbox-rro-order-info-button-create-receipt-payment-type').val();
+
                 $('#checkbox-rro-before-load').addClass('preloader');
 
-                $.get('index.php?route=extension/module/checkbox/createReceipt&order_id=<?= $order_id ?>&token=<?= $token; ?>', function (html) {
+                $.get('index.php?route=extension/module/checkbox/createReceipt&order_id=<?= $order_id ?>&payment_type=' + payment_type + '&token=<?= $token; ?>', function (html) {
 
                     $('#checkbox-rro-before-load').removeClass('preloader');
 

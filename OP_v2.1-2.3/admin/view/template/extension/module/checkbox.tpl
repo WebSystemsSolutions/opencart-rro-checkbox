@@ -85,6 +85,26 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-checkbox_rro_receipt_header"><?= $entry_rro_receipt_header; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="checkbox_rro_receipt_header" value="<?= $checkbox_rro_receipt_header; ?>"
+                     placeholder="<?= $entry_rro_receipt_header; ?>"
+                     id="input-checkbox_rro_receipt_header" class="form-control"/>
+
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-checkbox_rro_receipt_footer"><?= $entry_rro_receipt_footer; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="checkbox_rro_receipt_footer" value="<?= $checkbox_rro_receipt_footer; ?>"
+                     placeholder="<?= $entry_rro_receipt_footer; ?>"
+                     id="input-checkbox_rro_receipt_footer" class="form-control"/>
+
+            </div>
+          </div>
+
           <pre>
             <?php print_r($instruction) ?>
           </pre>

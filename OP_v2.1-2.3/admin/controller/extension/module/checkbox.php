@@ -37,6 +37,10 @@ class ControllerExtensionModuleCheckbox extends Controller
         $data['entry_rro_login'] = $this->language->get('entry_rro_login');
         $data['entry_rro_password'] = $this->language->get('entry_rro_password');
         $data['entry_rro_cashbox_key'] = $this->language->get('entry_rro_cashbox_key');
+
+        $data['entry_rro_receipt_header'] = $this->language->get('entry_rro_receipt_header');
+        $data['entry_rro_receipt_footer'] = $this->language->get('entry_rro_receipt_footer');
+
         $data['entry_status'] = $this->language->get('entry_status');
 
         $data['button_save'] = $this->language->get('button_save');
@@ -91,6 +95,18 @@ class ControllerExtensionModuleCheckbox extends Controller
             $data['checkbox_rro_is_dev'] = $this->request->post['checkbox_rro_is_dev'];
         } else {
             $data['checkbox_rro_is_dev'] = $this->config->get('checkbox_rro_is_dev');
+        }
+
+        if (isset($this->request->post['checkbox_rro_receipt_header'])) {
+            $data['checkbox_rro_receipt_header'] = $this->request->post['checkbox_rro_receipt_header'];
+        } else {
+            $data['checkbox_rro_receipt_header'] = $this->config->get('checkbox_rro_receipt_header');
+        }
+
+        if (isset($this->request->post['checkbox_rro_receipt_footer'])) {
+            $data['checkbox_rro_receipt_footer'] = $this->request->post['checkbox_rro_receipt_footer'];
+        } else {
+            $data['checkbox_rro_receipt_footer'] = $this->config->get('checkbox_rro_receipt_footer');
         }
 
         if (isset($this->request->post['checkbox_status'])) {
@@ -176,6 +192,12 @@ class ControllerExtensionModuleCheckbox extends Controller
             $order_id = 0;
         }
 
+        if (isset($this->request->get['payment_type'])) {
+            $payment_type = $this->request->get['payment_type'];
+        } else {
+            $payment_type = 'CASH';
+        }
+
         if (isset($this->request->get['is_return'])) {
             $is_return = ($this->request->get['is_return'] > 0);
         } else {
@@ -231,9 +253,17 @@ class ControllerExtensionModuleCheckbox extends Controller
         $params['delivery'] = ['email' => $email];
 
         $params['payments'][] = [
-            'type'  => 'CASH',
+            'type'  => ( in_array($payment_type, ['CASH', 'CASHLESS',  'CARD'])) ? $payment_type : 'CASH',
             'value' => $total
         ];
+
+        if ($this->config->get('checkbox_rro_receipt_header')) {
+            $params['header'] = $this->config->get('checkbox_rro_receipt_header');
+        }
+
+        if ($this->config->get('checkbox_rro_receipt_footer')) {
+            $params['footer'] = $this->config->get('checkbox_rro_receipt_footer');
+        }
 
         $receipt = $this->model_extension_payment_checkbox->create_receipt($params);
 
