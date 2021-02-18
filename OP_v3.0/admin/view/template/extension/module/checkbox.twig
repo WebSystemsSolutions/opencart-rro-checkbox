@@ -1,0 +1,116 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-checkbox" data-toggle="tooltip" title="{{ button_save }}"
+                class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}"
+           class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if  error_warning %}
+      <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-checkbox"
+              class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-module_checkbox_rro_login">{{ entry_rro_login }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_checkbox_rro_login" value="{{ module_checkbox_rro_login }}"
+                     placeholder="{{ entry_rro_login }}"
+                     id="input-module_checkbox_rro_login" class="form-control"/>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-module_checkbox_rro_password">{{ entry_rro_password }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_checkbox_rro_password" value="{{ module_checkbox_rro_password }}"
+                     placeholder="{{ entry_rro_password }}"
+                     id="input-module_checkbox_rro_password" class="form-control"/>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-module_checkbox_rro_cashbox_key">{{ entry_rro_cashbox_key }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_checkbox_rro_cashbox_key" value="{{ module_checkbox_rro_cashbox_key }}"
+                     placeholder="{{ entry_rro_cashbox_key }}"
+                     id="input-module_checkbox_rro_cashbox_key" class="form-control"/>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-module_checkbox_rro_is_dev">DEV режим</label>
+            <div class="col-sm-10">
+              <select name="module_checkbox_rro_is_dev" id="input-module_checkbox_rro_is_dev" class="form-control">
+                {% if  module_checkbox_rro_is_dev %}
+                  <option value="1" selected="selected">{{ text_enabled }}</option>
+                  <option value="0">{{ text_disabled }}</option>
+                 {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <select name="module_checkbox_status" id="input-status" class="form-control">
+                {% if  module_checkbox_status %}
+                  <option value="1" selected="selected">{{ text_enabled }}</option>
+                  <option value="0">{{ text_disabled }}</option>
+                 {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-module_checkbox_rro_receipt_header">{{ entry_rro_receipt_header }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_checkbox_rro_receipt_header" value="{{ module_checkbox_rro_receipt_header }}"
+                     placeholder="{{ entry_rro_receipt_header }}"
+                     id="input-module_checkbox_rro_receipt_header" class="form-control"/>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-module_checkbox_rro_receipt_footer">{{ entry_rro_receipt_footer }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_checkbox_rro_receipt_footer" value="{{ module_checkbox_rro_receipt_footer }}"
+                     placeholder="{{ entry_rro_receipt_footer }}"
+                     id="input-module_checkbox_rro_receipt_footer" class="form-control"/>
+
+            </div>
+          </div>
+
+          <pre>
+            {{ instruction }}
+          </pre>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}
