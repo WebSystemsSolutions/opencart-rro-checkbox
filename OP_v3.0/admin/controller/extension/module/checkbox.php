@@ -263,7 +263,7 @@ class ControllerExtensionModuleCheckbox extends Controller
                 'type'  => $discount_type,
                 'mode'  => 'VALUE',
                 'value' => abs($discount_price),
-                'name'  => $order_total['title'],
+                'name'  => strip_tags($order_total['title']),
             );
         }
 
