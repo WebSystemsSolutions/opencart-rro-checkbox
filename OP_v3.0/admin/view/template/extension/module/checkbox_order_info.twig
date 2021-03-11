@@ -34,9 +34,15 @@
 
                 var payment_type = $('#checkbox-rro-order-info-button-create-receipt-payment-type').val();
 
+                if ($('#checkbox-rro-order-info-button-create-receipt-send-email').prop('checked')) {
+                    var send_email = 1;
+                } else {
+                    var send_email = 0;
+                }
+
                 $('#checkbox-rro-before-load').addClass('preloader');
 
-                $.get('index.php?route=extension/module/checkbox/createReceipt&order_id={{ order_id}}&payment_type=' + payment_type + '&user_token={{ user_token }}', function (html) {
+                $.get('index.php?route=extension/module/checkbox/createReceipt&order_id={{ order_id}}&payment_type=' + payment_type + '&send_email=' + send_email + '&user_token={{ user_token }}', function (html) {
 
                     $('#checkbox-rro-before-load').removeClass('preloader');
 

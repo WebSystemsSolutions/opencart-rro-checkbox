@@ -44,17 +44,22 @@
     {% endif %}
 
   {% else %}
-    <td>Згенерувати чек</td>
-    <td>
-      <select class="form-control" id="checkbox-rro-order-info-button-create-receipt-payment-type">
-        <option value="CASH" selected>Готівка</option>
-        <option value="CARD">Безготівкова форма оплати</option>
-      </select>
-    </td>
-    <td>
-      <button id="checkbox-rro-order-info-button-create-receipt" class="btn btn-success btn-lg"><i
-                class="fa fa-shopping-cart"></i></button>
-    </td>
+    <tr>
+      <td>Згенерувати чек</td>
+      <td>
+        <select class="form-control" id="checkbox-rro-order-info-button-create-receipt-payment-type">
+          <option value="CASH" >Готівка</option>
+          <option value="CARD" selected>Безготівкова форма оплати</option>
+        </select>
+      </td>
+      <td>
+        <button id="checkbox-rro-order-info-button-create-receipt" class="btn btn-success btn-lg"><i
+                  class="fa fa-shopping-cart"></i></button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">Відправити Email з чеком кієнту</td>
+      <td><input type="checkbox" id="checkbox-rro-order-info-button-create-receipt-send-email" value="1" checked></td>
     </tr>
   {% endif %}
   </tbody>

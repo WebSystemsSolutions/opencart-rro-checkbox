@@ -198,6 +198,12 @@ class ControllerExtensionModuleCheckbox extends Controller
             $payment_type = 'CASH';
         }
 
+        if (isset($this->request->get['send_email'])) {
+            $send_email = $this->request->get['send_email'];
+        } else {
+            $send_email = true;
+        }
+
         if (isset($this->request->get['is_return'])) {
             $is_return = ($this->request->get['is_return'] > 0);
         } else {
@@ -250,7 +256,39 @@ class ControllerExtensionModuleCheckbox extends Controller
         $params['goods'] = $goods;
         $params['cashier_name'] = $cashier_name;
         $params['departament'] = $departament;
-        $params['delivery'] = ['email' => $email];
+
+        if ($send_email) {
+            $params['delivery'] = ['email' => $email];
+        }
+
+
+        $order_totals = $this->model_sale_order->getOrderTotals($this->request->get['order_id']);
+
+        foreach ($order_totals as $order_total) {
+
+            if ('total' == $order_total['code']) {
+                $total = (float)number_format((float)$order_total['value'], 2, '', '');
+            }
+
+            if (in_array($order_total['code'], array('sub_total', 'total'))) {
+                continue;
+            }
+
+            if ($order_total['value'] > 0) {
+                $discount_type = 'EXTRA_CHARGE';
+            } else {
+                $discount_type = 'DISCOUNT';
+            }
+
+            $discount_price = (float)number_format((float)$order_total['value'], 2, '', '');
+
+            $params['discounts'][] = array(
+                'type'  => $discount_type,
+                'mode'  => 'VALUE',
+                'value' => abs($discount_price),
+                'name'  => $order_total['title'],
+            );
+        }
 
         $params['payments'][] = [
             'type'  => ( in_array($payment_type, ['CASH', 'CASHLESS',  'CARD'])) ? $payment_type : 'CASH',
@@ -266,6 +304,9 @@ class ControllerExtensionModuleCheckbox extends Controller
         }
 
         $receipt = $this->model_extension_payment_checkbox->create_receipt($params);
+
+        $this->json['return_$params'] = $params;
+        $this->json['return_$receipt'] = $receipt;
 
         if (isset($receipt['id'])) {
             if ($is_return) {
