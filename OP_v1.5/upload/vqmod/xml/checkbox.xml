@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<name>Checkbox RRO</name>
+    <author>web systems solutions</author>
+    <id>checkbox_rro</id>
+    <code>checkbox_rro</code>
+    <version>1.0</version>
+    <link>https://web-systems.solutions/</link>
+
+	<!-- ADMIN ========================================================================== -->
+	<file path="admin/controller/sale/order.php">
+		<operation>
+			<search position="before">
+				<![CDATA[
+				$this->template = 'sale/order_list.tpl';
+				]]>
+			</search>
+			<add>
+				<![CDATA[
+				// Checkbox . Begin
+				ob_start();
+				$this->data['checkbox_rro'] = $this->getChild('module/checkbox/getViewList', $this->data);
+				ob_get_clean();
+				// Checkbox . End
+        		]]>
+			</add>
+		</operation>
+		<operation>
+			<search position="before">
+				<![CDATA[
+				$this->template = 'sale/order_info.tpl';
+				]]>
+			</search>
+			<add>
+				<![CDATA[
+				// Checkbox . Begin
+				ob_start();
+				$this->data['checkbox_rro'] = $this->getChild('module/checkbox/getViewInfo', $this->data);
+				ob_get_clean();
+				$this->data['checkbox_status'] = $this->config->get('checkbox_status');
+				// Checkbox . End
+        		]]>
+			</add>
+		</operation>
+	</file>
+
+	<file path="admin/view/template/sale/order_info.tpl">
+		<operation>
+			<search position="after">
+				<![CDATA[
+				<a href="#tab-order">
+				]]>
+			</search>
+			<add>
+				<![CDATA[
+				<!-- Checkbox . Begin -->
+				<?php if ($checkbox_status) { ?>
+					<a href="#tab-rro">Checkbox PPO</a>
+				<?php } ?>
+				<!-- Checkbox . End -->
+        		]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="before">
+				<![CDATA[
+				<div id="tab-payment" class="vtabs-content">
+				]]>
+			</search>
+			<add>
+				<![CDATA[
+				<!-- Checkbox . Begin -->
+				<?php if ($checkbox_status) { ?>
+					<div id="tab-rro" class="vtabs-content">
+						<?php echo $checkbox_rro ?>
+					</div>
+				<?php } ?>
+				<!-- Checkbox . End -->
+        		]]>
+			</add>
+		</operation>
+	</file>
+
+	<file path="admin/view/template/sale/order_list.tpl">
+		<operation>
+			<search position="after">
+				<![CDATA[
+				<div class="box">
+				]]>
+			</search>
+			<add>
+				<![CDATA[
+				<!-- Checkbox . Begin -->
+				<?php echo $checkbox_rro ?>
+				<!-- Checkbox . End -->
+        		]]>
+			</add>
+		</operation>
+	</file>
+
+</modification>
