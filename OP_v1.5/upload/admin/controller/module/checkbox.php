@@ -503,8 +503,6 @@ class ControllerModuleCheckbox extends Controller
 
         $shift = $this->model_extension_payment_checkbox->getCurrentCashierShift();
 
-        wss_log($shift);
-
         if ($shift) {
             $shift_id = isset($shift['id']) ? $shift['id'] : '';
             $is_connected = isset($shift['status']) && ($shift['status'] == 'OPENED');
