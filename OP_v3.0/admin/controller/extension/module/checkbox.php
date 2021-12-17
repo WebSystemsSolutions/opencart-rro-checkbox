@@ -195,7 +195,7 @@ class ControllerExtensionModuleCheckbox extends Controller
 
         $email = $order_info['email'];
         //$cashier_name = $order_info['firstname'] . ' ' . $order_info['lastname'];
-        $cashier_name = $this->config->get('config_name');
+        $cashier_name =$order_info['store_name'];
         $departament = 'store';
 
 
